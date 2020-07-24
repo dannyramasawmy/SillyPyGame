@@ -22,6 +22,9 @@ SCREEN_HEIGHT = 600
 # initialize the mixer in pygame (call before pygame.init())
 pygame.mixer.init(44100, -16, 1, 512)
 
+# colours
+white = (255, 255, 255)
+
 # Load all sound files
 move_up_sound = pygame.mixer.Sound("sounds/soundUp.wav")
 move_down_sound = pygame.mixer.Sound("sounds/soundDown.wav")
