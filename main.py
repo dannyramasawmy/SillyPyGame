@@ -61,6 +61,10 @@ running = True
 
 # Score 
 scoreCounter = 0
+maxLives = 3
+livesCounter = 3
+maxCollisionDelay = 30
+collisionDelayCounter = maxCollisionDelay
 scoreAdder = 0.2 # for debugging [0.2]
 
 # # get highest score
@@ -140,9 +144,13 @@ while running:
     screen.fill((0, 0, 0))
     screen.blit(screen_image, (0, 0))
 
+    # # # Lives
+    textLives = font.render('Lives: {:0>1d} / {:0>1d}'.format(int(livesCounter), maxLives), True, white)
+    textLRect = textLives.get_rect()
+    textLRect.center = (SCREEN_WIDTH - 116, 50)
+
     # # #  update text/score
     # create a text surface object on which text is drawn on it. 
-    white = (255, 255, 255) 
     textScore = font.render('Score: {:0>8d}'.format(int(scoreCounter)), True, white) 
     # create a rectangular object for the text surface object 
     textRect = textScore.get_rect()  
@@ -156,6 +164,7 @@ while running:
     
     screen.blit(textScore, textRect) 
     screen.blit(textHighScore, textHSRect)
+    screen.blit(textLives, textLRect) 
     
     # # # DRAW EVERYTHING
     # Draw all sprites
@@ -165,17 +174,26 @@ while running:
     # # # DETECT COLLISIONS
     # Check if any enemies have collided with the player
     if pygame.sprite.spritecollideany(player, enemies):
-        # If so, then remove the player and stop the loop
-        player.kill()
 
-        # Stop any moving sounds and play the collision sound
-        move_up_sound.stop()
-        move_down_sound.stop()
+        if collisionDelayCounter >= 0:
+            collisionDelayCounter -= 1
+        else:
+            collisionDelayCounter = maxCollisionDelay
+            livesCounter -= 1
 
         # play collision sound
         collision_sound.play()
-        sleep(0.5)
-        running = False
+
+        if livesCounter <= 0:
+            # If so, then remove the player and stop the loop
+            player.kill()
+
+            # Stop any moving sounds and play the collision sound
+            move_up_sound.stop()
+            move_down_sound.stop()
+
+            sleep(0.5)
+            running = False
 
     # Update the display
     pygame.display.flip()
