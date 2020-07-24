@@ -11,6 +11,9 @@ class Player(pygame.sprite.Sprite):
         # self.surf = pygame.Surface((75, 25))
         # self.surf.fill((255, 255, 255))
         self.rect = self.surf.get_rect()
+        
+        # make a speed (for quick game tuning)
+        self.speed = 10
 
     # Move the sprite based on user keypresses
     def update(self, pressed_keys):
@@ -23,7 +26,7 @@ class Player(pygame.sprite.Sprite):
         # on key up
         if pressed_keys[K_UP]:
             # move the rectangle
-            self.rect.move_ip(0, -5)
+            self.rect.move_ip(0, -self.speed)
             # change the sprite
             self.surf = pygame.image.load("images/playerUp.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
@@ -31,20 +34,20 @@ class Player(pygame.sprite.Sprite):
             move_up_sound.play()
         # on key down
         if pressed_keys[K_DOWN]:
-            self.rect.move_ip(0, 5)
+            self.rect.move_ip(0, self.speed)
             self.surf = pygame.image.load("images/playerDown.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
             move_down_sound.play()
         # on key left
         if pressed_keys[K_LEFT]:
-            self.rect.move_ip(-5, 0)
+            self.rect.move_ip(-self.speed, 0)
             self.surf = pygame.image.load("images/playerLeft.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
             move_left_sound.play()
 
         # on key right
         if pressed_keys[K_RIGHT]:
-            self.rect.move_ip(5, 0)
+            self.rect.move_ip(self.speed, 0)
             self.surf = pygame.image.load("images/playerRight.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
             move_right_sound.play()

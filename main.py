@@ -39,7 +39,7 @@ font = pygame.font.Font('freesansbold.ttf', 20)
 
 # Create a custom event for adding a new enemy
 ADDENEMY = pygame.USEREVENT + 1
-pygame.time.set_timer(ADDENEMY, 550)
+pygame.time.set_timer(ADDENEMY, 500)
 # Create a custom event for adding a new cloud
 ADDCLOUD = pygame.USEREVENT + 2
 pygame.time.set_timer(ADDCLOUD, 1000)
@@ -61,6 +61,7 @@ running = True
 
 # Score 
 scoreCounter = 0
+scoreAdder = 1 # for debugging [0.2]
 
 # # get highest score
 with open('score.txt', 'r') as f:
@@ -72,11 +73,12 @@ with open('score.txt', 'r') as f:
 pygame.mixer.music.load("sounds/BackingTrack.mp3")
 pygame.mixer.music.play(loops=-1)
 
+
 # Main loop
 while running:
 
     # increase score
-    scoreCounter = scoreCounter + 0.2
+    scoreCounter = scoreCounter + scoreAdder
     # if the high score is beaten reassign
     if scoreCounter > highScore:
         highScore = int(scoreCounter)
@@ -89,6 +91,11 @@ while running:
             # Was it the Escape key? If so, stop the loop.
             if event.key == K_ESCAPE:
                 running = False
+            
+            # DEBUG key
+            if event.key == K_0:
+                # enter a debug point
+                print('DEBUG')
 
         # Did the user click the window close button? If so, stop the loop.
         elif event.type == QUIT:
@@ -96,8 +103,13 @@ while running:
 
         # Add a new enemy?
         elif event.type == ADDENEMY:
+            # scale velocities with score
+            ls = 0
+            hs = 10 + scoreCounter//50
+            pp = player.rect.centery;
+            
             # Create the new enemy and add it to sprite groups
-            new_enemy = Enemy()
+            new_enemy = Enemy(ls, hs, pp)
             enemies.add(new_enemy)
             all_sprites.add(new_enemy)
 
@@ -170,20 +182,17 @@ while running:
 
     # Ensure program maintains a rate of 30 frames per second
     clock.tick(30)
+    
 
-# All done! Stop and quit the mixer.
-
-pygame.mixer.quit()
 
 # write file
 data = {'highscore':str(highScore)}
 with open('score.txt', 'w') as f:
     f.write(json.dumps(data))
 
-
 # # # print final score
 font = pygame.font.Font('freesansbold.ttf', 50) 
-textFinalScore = font.render('Final Score: {:0>8d}'.format(int(highScore)), True, white)
+textFinalScore = font.render('Final Score: {:0>8d}'.format(int(scoreCounter)), True, white)
 textFRect = textFinalScore.get_rect()  
 textFRect.center = (SCREEN_WIDTH//2, SCREEN_HEIGHT//2) 
 screen.blit(textFinalScore, textFRect) 
@@ -191,8 +200,10 @@ screen.blit(textFinalScore, textFRect)
 pygame.display.flip()
 sleep(5)
 
-# stop the game
+# All done! Stop and quit the mixer.
 pygame.mixer.music.stop()
+pygame.mixer.quit()
+
 
 # Done! Time to quit.
 pygame.quit()

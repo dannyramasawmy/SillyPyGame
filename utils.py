@@ -12,6 +12,7 @@ from pygame.locals import (
     K_ESCAPE,
     KEYDOWN,
     QUIT,
+    K_0,
 )
 
 # Define constants for the screen width and height
