@@ -61,7 +61,7 @@ running = True
 
 # Score 
 scoreCounter = 0
-scoreAdder = 1 # for debugging [0.2]
+scoreAdder = 0.2 # for debugging [0.2]
 
 # # get highest score
 with open('score.txt', 'r') as f:
