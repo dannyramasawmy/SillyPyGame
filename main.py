@@ -181,8 +181,8 @@ while running:
             collisionDelayCounter = maxCollisionDelay
             livesCounter -= 1
 
-        # play collision sound
-        collision_sound.play()
+            # play collision sound
+            collision_sound.play()
 
         if livesCounter <= 0:
             # If so, then remove the player and stop the loop
