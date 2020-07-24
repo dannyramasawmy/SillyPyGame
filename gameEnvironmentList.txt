@@ -1,0 +1,21 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+# platform: win-64
+@EXPLICIT
+https://repo.anaconda.com/pkgs/main/win-64/vs2015_runtime-14.16.27012-hf0eaf9b_3.conda
+https://repo.anaconda.com/pkgs/main/win-64/vc-14.1-h0510ff6_4.conda
+https://repo.anaconda.com/pkgs/main/win-64/python-3.5.6-he025d50_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/certifi-2018.8.24-py35_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/colorama-0.4.3-py_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/lazy-object-proxy-1.3.1-py35hfa6e2cd_2.conda
+https://repo.anaconda.com/pkgs/main/win-64/mccabe-0.6.1-py35_1.conda
+https://repo.anaconda.com/pkgs/main/noarch/six-1.15.0-py_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/typed-ast-1.1.0-py35hfa6e2cd_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/wincertstore-0.2-py35hfebbdb8_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/wrapt-1.10.11-py35hfa6e2cd_2.conda
+https://repo.anaconda.com/pkgs/main/win-64/astroid-2.0.4-py35_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/setuptools-40.2.0-py35_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/isort-4.3.4-py35_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/wheel-0.31.1-py35_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/pip-10.0.1-py35_0.conda
+https://repo.anaconda.com/pkgs/main/win-64/pylint-2.1.1-py35_0.conda
