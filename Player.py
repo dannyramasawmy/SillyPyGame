@@ -27,21 +27,27 @@ class Player(pygame.sprite.Sprite):
             # change the sprite
             self.surf = pygame.image.load("images/playerUp.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+            # play the sound
+            move_up_sound.play()
         # on key down
         if pressed_keys[K_DOWN]:
             self.rect.move_ip(0, 5)
             self.surf = pygame.image.load("images/playerDown.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+            move_down_sound.play()
         # on key left
         if pressed_keys[K_LEFT]:
             self.rect.move_ip(-5, 0)
             self.surf = pygame.image.load("images/playerLeft.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+            move_left_sound.play()
+
         # on key right
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(5, 0)
             self.surf = pygame.image.load("images/playerRight.png").convert()
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
+            move_right_sound.play()
 
 
         # Keep player on the screen

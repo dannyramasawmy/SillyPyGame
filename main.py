@@ -19,6 +19,9 @@ from utils import *
 from Player import Player
 from Enemy import Enemy
 from Cloud import Cloud
+from time import sleep
+
+
 
 # Initialise pygame
 pygame.init()
@@ -63,6 +66,11 @@ scoreCounter = 0
 with open('score.txt', 'r') as f:
     tmpHs = json.load(f)
     highScore = int(tmpHs['highscore'])  
+
+
+# start the music
+pygame.mixer.music.load("sounds/BackingTrack.mp3")
+pygame.mixer.music.play(loops=-1)
 
 # Main loop
 while running:
@@ -147,6 +155,14 @@ while running:
     if pygame.sprite.spritecollideany(player, enemies):
         # If so, then remove the player and stop the loop
         player.kill()
+
+        # Stop any moving sounds and play the collision sound
+        move_up_sound.stop()
+        move_down_sound.stop()
+
+        # play collision sound
+        collision_sound.play()
+        sleep(0.5)
         running = False
 
     # Update the display
@@ -155,11 +171,28 @@ while running:
     # Ensure program maintains a rate of 30 frames per second
     clock.tick(30)
 
+# All done! Stop and quit the mixer.
+
+pygame.mixer.quit()
 
 # write file
 data = {'highscore':str(highScore)}
 with open('score.txt', 'w') as f:
     f.write(json.dumps(data))
+
+
+# # # print final score
+font = pygame.font.Font('freesansbold.ttf', 50) 
+textFinalScore = font.render('Final Score: {:0>8d}'.format(int(highScore)), True, white)
+textFRect = textFinalScore.get_rect()  
+textFRect.center = (SCREEN_WIDTH//2, SCREEN_HEIGHT//2) 
+screen.blit(textFinalScore, textFRect) 
+# Update the display
+pygame.display.flip()
+sleep(5)
+
+# stop the game
+pygame.mixer.music.stop()
 
 # Done! Time to quit.
 pygame.quit()
