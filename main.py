@@ -1,7 +1,8 @@
 ''' FirstPyGame
+In this game you are a terrible looking spaceship trying to avoid being hit by angry stars.
+Clouds do no harm!
 
 Author: Danny Ramasawmy and Irina Grigorescu
-Date Created:
 
 A simple game following the tutorial by [1] which is a great intro!
 
