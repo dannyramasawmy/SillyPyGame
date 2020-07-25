@@ -7,9 +7,6 @@ A simple game following the tutorial by [1] which is a great intro!
 
 Ref:
 [1]: https://realpython.com/pygame-a-primer/
-
-
-Sound has not been included, see the link above.
 '''
 
 # Import and initialize the pygame library
@@ -19,8 +16,6 @@ from utils import *
 from Player import Player
 from Enemy import Enemy
 from Cloud import Cloud
-from time import sleep
-
 
 
 # Initialise pygame
@@ -192,7 +187,7 @@ while running:
             move_up_sound.stop()
             move_down_sound.stop()
 
-            sleep(0.5)
+            pygame.time.delay(500)
             running = False
 
     # Update the display
@@ -216,7 +211,7 @@ textFRect.center = (SCREEN_WIDTH//2, SCREEN_HEIGHT//2)
 screen.blit(textFinalScore, textFRect) 
 # Update the display
 pygame.display.flip()
-sleep(5)
+pygame.time.delay(5 * 1000) # [ms]
 
 # All done! Stop and quit the mixer.
 pygame.mixer.music.stop()
