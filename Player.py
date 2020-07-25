@@ -15,12 +15,20 @@ class Player(pygame.sprite.Sprite):
         # make a speed (for quick game tuning)
         self.speed = 10
 
+        # load the correct sprites
+        self.images = {}
+        self.images['default']  = pygame.image.load("images/player.png").convert() 
+        self.images['up']       = pygame.image.load("images/playerUp.png").convert()
+        self.images['down']     = pygame.image.load("images/playerDown.png").convert()
+        self.images['left']     = pygame.image.load("images/playerLeft.png").convert()
+        self.images['right']    = pygame.image.load("images/playerRight.png").convert()
+
     # Move the sprite based on user keypresses
     def update(self, pressed_keys):
         '''Update object suraface every key press.'''
 
         # if there is no keypress use the static image
-        self.surf = pygame.image.load("images/player.png").convert()
+        self.surf = self.images['default']
         self.surf.set_colorkey((255, 255, 255), RLEACCEL)
 
         # on key up
@@ -28,27 +36,27 @@ class Player(pygame.sprite.Sprite):
             # move the rectangle
             self.rect.move_ip(0, -self.speed)
             # change the sprite
-            self.surf = pygame.image.load("images/playerUp.png").convert()
+            self.surf = self.images['up']
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
             # play the sound
             move_up_sound.play()
         # on key down
         if pressed_keys[K_DOWN]:
             self.rect.move_ip(0, self.speed)
-            self.surf = pygame.image.load("images/playerDown.png").convert()
+            self.surf = self.images['down']
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
             move_down_sound.play()
         # on key left
         if pressed_keys[K_LEFT]:
             self.rect.move_ip(-self.speed, 0)
-            self.surf = pygame.image.load("images/playerLeft.png").convert()
+            self.surf = self.images['left']
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
             move_left_sound.play()
 
         # on key right
         if pressed_keys[K_RIGHT]:
             self.rect.move_ip(self.speed, 0)
-            self.surf = pygame.image.load("images/playerRight.png").convert()
+            self.surf = self.images['right']
             self.surf.set_colorkey((255, 255, 255), RLEACCEL)
             move_right_sound.play()
 
